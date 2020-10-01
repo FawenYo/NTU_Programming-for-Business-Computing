@@ -1,9 +1,9 @@
-from Coursera.week2 import hw
+from Coursera.week2 import homework
 
 
 def main():
     calculate_list = [500, 100, 50, 10, 5, 1]
-    return_amounts = hw.calculate(input_num=input("input num:"))
+    return_amounts = homework.calculate(input_num=input("input num:"))
     print(
         "; ".join(
             "{}, {}".format(calculate_list[index], value)
