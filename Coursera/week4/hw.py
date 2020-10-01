@@ -8,7 +8,7 @@ def main():
         user_input = input()
         input_list.append(int(user_input))
     # Probability list
-    prob_demand = input_list[-1]
+    prob_demand = input_list[2]
     # +1 為 0銷售情況
     for index in range(prob_demand + 1):
         user_input = input()
@@ -23,7 +23,7 @@ def profit(input_list):
     unit_input_price = input_list[0]
     # 單位零售價格
     unit_retail_price = input_list[1]
-    # 需求的可能個數 = 8
+    # 需求的可能個數
     prob_demand = input_list[2]
     total_prob_list = input_list[3 : prob_demand + 4]
     for demand, each_probability in enumerate(total_prob_list):
