@@ -33,9 +33,10 @@ def solution(data, customer_action):
         else:
             launch_num += 1
             drink_num += 1
-            revenue += launch_price + drink_price - discount
-    if revenue < 0:
-        revenue = 0
+            result = launch_price + drink_price - discount
+            if result < 0:
+                result = 0
+            revenue += result
     return str(launch_num), str(drink_num), str(revenue)
 
 
