@@ -1,14 +1,28 @@
 """ input data """
-# 投資標的, 預算, 風險趨避
-investment_targets, budget, risk_aversion = [int(i) for i in input().split(",")]
+input_data = input().split(",")
+# 投資標的
+investment_targets = int(input_data[0])
+# 預算
+budget = int(input_data[1])
+# 風險趨避
+risk_aversion = int(input_data[2])
+
+
 # 投資標的之資金需求
-capital_needs = [int(i) for i in input().split(",")]
+capital_needs = []
+for i in input().split(","):
+    capital_needs.append(int(i))
 # 預期報酬
-expected_returns = [int(i) for i in input().split(",")]
+expected_returns = []
+for i in input().split(","):
+    expected_returns.append(int(i))
 # 變異數
 variances = []
 for i in range(investment_targets):
-    variances.append([int(i) for i in input().split(",")])
+    insert_data = []
+    for each_i in input().split(","):
+        insert_data.append(int(each_i))
+    variances.append(insert_data)
 
 """ main() """
 # result
