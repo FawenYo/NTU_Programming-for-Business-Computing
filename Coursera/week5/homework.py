@@ -64,9 +64,7 @@ def choose_location(left_location):
             best_town = index_i
             best_nearby = nearby_town
 
-    left_location = [
-        i for i in left_location if i not in best_nearby
-    ]
+    left_location = [i for i in left_location if i not in best_nearby]
     return best_town, best_population, left_location
 
 
