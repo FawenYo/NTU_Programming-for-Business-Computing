@@ -3,8 +3,10 @@ def main():
     data = [int(i) for i in input().split(",")]
     # 使用者行為
     customer_action = [int(i) for i in input().split(",")]
-    
-    launch_num, drink_num, revenue = solution(data=data, customer_action=customer_action)
+
+    launch_num, drink_num, revenue = solution(
+        data=data, customer_action=customer_action
+    )
     print(launch_num + "," + drink_num + "," + revenue)
 
 
@@ -40,5 +42,5 @@ def solution(data, customer_action):
     return str(launch_num), str(drink_num), str(revenue)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -6,7 +6,9 @@ def main():
     # 折價優惠
     discount = int(input())
 
-    answer = solution(launch_price=launch_price, drink_price=drink_price, discount=discount)
+    answer = solution(
+        launch_price=launch_price, drink_price=drink_price, discount=discount
+    )
     print(answer)
 
 
@@ -18,5 +20,5 @@ def solution(launch_price, drink_price, discount):
         return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
