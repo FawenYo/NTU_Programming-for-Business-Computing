@@ -1,13 +1,14 @@
 from flask import Flask, request
+
 app = Flask(__name__)
 
 
-@app.route('/input/')
+@app.route("/input/")
 def index():
-    data = request.args.get('data')
+    data = request.args.get("data")
     print(data)
-    return ''
+    return ""
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()
