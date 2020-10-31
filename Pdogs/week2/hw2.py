@@ -1,47 +1,33 @@
 def main():
-    input_list = []
-    # 輸入順序: 全票數量, 全票價格, 學生票數量, 學生票價格, 總支付金額, 購票上限
-    for index in range(6):
-        user_input = input()
-        input_list.append(int(user_input))
-    raw_ticket_left, raw_return_amount = calculate(input_list=input_list)
-    # "尚可購買張數" < 0 則輸出 "-1"
-    if raw_ticket_left >= 0:
-        ticket_left = str(raw_ticket_left)
-    else:
-        ticket_left = "-1"
-    # "找錢金額"" < 0 則輸出 "-2"
-    if raw_return_amount >= 0:
-        return_amount = "$" + str(raw_return_amount)
-    else:
-        return_amount = "-2"
-    print(ticket_left + "," + return_amount)
+    user_inputs = []
+    for i in range(7):
+        user_inputs.append(int(input()))
+    print(calculate(user_inputs=user_inputs))
 
 
-def calculate(input_list):
-    # 全票數量
-    full_ticket_quantity = input_list[0]
-    # 全票價格
-    full_ticket_price = input_list[1]
-    # 學生票數量
-    concession_ticket_quantity = input_list[2]
-    # 學生票價格
-    concession_ticket_price = input_list[3]
-    # 總支付金額
-    total_amount = input_list[4]
-    # 購票上限
-    ticket_limit = input_list[5]
+def calculate(user_inputs):
+    # 上一個級距的數量
+    previous_interval_amount = 0
+    pay_amount = 0
 
-    # 尚可購買張數 = 購票上限 - 全票數量 - 學生票數量
-    ticket_left = ticket_limit - full_ticket_quantity - concession_ticket_quantity
-
-    # 全票金額 = 全價數量 * 全票價格
-    full_ticket_amount = full_ticket_quantity * full_ticket_price
-    # 學生票金額 = 學生價數量 * 學生票價格
-    concession_ticket_amount = concession_ticket_quantity * concession_ticket_price
-    # 找錢金額 = 總支付金額 - 全票金額 - 學生票金額
-    return_amount = total_amount - full_ticket_amount - concession_ticket_amount
-    return ticket_left, return_amount
+    # 最少需要購買的食材公斤數
+    demand = user_inputs[0]
+    for index in range(1, len(user_inputs), 2):
+        # 級距數量
+        class_interval_amount = user_inputs[index]
+        # 級距單價
+        class_interval_price = user_inputs[index + 1]
+        if demand < class_interval_amount:
+            # 該級距應付金額 = (需求量 - 上一個級距的數量) * 級距單價
+            pay_amount += (demand - previous_interval_amount) * class_interval_price
+            return pay_amount
+        else:
+            # 該級距應付金額 = (級距數量 - 上一個級距的數量) * 級距單價
+            pay_amount += (
+                class_interval_amount - previous_interval_amount
+            ) * class_interval_price
+            previous_interval_amount = class_interval_amount
+    return pay_amount
 
 
 if __name__ == "__main__":

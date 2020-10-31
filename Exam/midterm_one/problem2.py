@@ -19,5 +19,5 @@ def solution():
     return min(result_list)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -34,7 +34,9 @@ def solution():
 def coverage(current_point):
     cover_population = 0
     for each_point in POINTS:
-        distance = calculate_distance(current_point=current_point, each_point=each_point)
+        distance = calculate_distance(
+            current_point=current_point, each_point=each_point
+        )
         if distance <= COVER_DISTANCE:
             cover_population += each_point[2]
     return cover_population
@@ -52,5 +54,5 @@ def calculate_distance(current_point, each_point):
     return distance
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -1,60 +1,83 @@
-TOTAL_CLASS = 0
-DEMAND = 0
+ITEM_NUM = 0
+BACKPACK_CAPABILITY = 0
 
 
 def main():
-    global TOTAL_CLASS, DEMAND
-    # 總級距數量, 最少需要購買的食材公斤數
-    TOTAL_CLASS, DEMAND = [int(i) for i in input().split(",")]
-    user_inputs = [int(i) for i in input().split(",")]
-    print(calculate(user_inputs=user_inputs))
+    global ITEM_NUM, BACKPACK_CAPABILITY
+
+    ITEM_NUM, BACKPACK_CAPABILITY = [int(i) for i in input().split(",")]
+    items_weight = [int(i) for i in input().split(",")]
+    items_utility = [int(i) for i in input().split(",")]
+    answer = solution(items_weight=items_weight, items_utility=items_utility)
+    print(answer)
 
 
-def calculate(user_inputs):
-    # 上一個級距的數量
-    previous_interval_amount = 0
-    # 總支付金額, 原始支付金額, 最佳支付金額
-    total_pay = origin_pay = best_pay = 0
-    # 最佳支付數量
-    best_amount = 0
-    done = False
+def solution(items_weight, items_utility):
+    utility_one, list_one = algorithm_one(
+        items_weight=items_weight, items_utility=items_utility
+    )
+    utility_two, list_two = algorithm_two(
+        items_weight=items_weight, items_utility=items_utility
+    )
+    if utility_one >= utility_two:
+        return ",".join(str(i) for i in sorted(list_one))
+    else:
+        return ",".join(str(i) for i in sorted(list_two))
 
-    for index in range(0, TOTAL_CLASS):
-        # 級距數量
-        class_interval_amount = user_inputs[index]
-        # 級距單價
-        class_interval_price = user_inputs[index + TOTAL_CLASS]
 
-        # 該級距應付金額 = (級距數量 - 上一個級距的數量) * 級距單價
-        interval_amount = (
-            class_interval_amount - previous_interval_amount
-        ) * class_interval_price
+# 演算法 - 1
+def algorithm_one(items_weight, items_utility):
+    space = 0
+    utility = 0
+    answer_list = []
 
-        total_pay += interval_amount
+    # (編號, 重量, 效用, CP值)
+    temp_list = [
+        (
+            index + 1,
+            items_weight[index],
+            items_utility[index],
+            items_utility[index] / items_weight[index],
+        )
+        for index in range(ITEM_NUM)
+    ]
+    # CP值較大 > 重量較輕 > 編號較小
+    sorted_list = sorted(temp_list, key=lambda tup: (-tup[3], tup[1], tup[0], tup[2]))
+    for each in sorted_list:
+        __index__ = each[0]
+        __weight__ = each[1]
+        __utility__ = each[2]
+        temp_space = space + __weight__
+        if temp_space <= BACKPACK_CAPABILITY:
+            space = temp_space
+            utility += __utility__
+            answer_list.append(__index__)
+    return utility, sorted(answer_list)
 
-        if DEMAND <= class_interval_amount:
-            # 尚未達到需求數量
-            if not done:
-                # 該級距應付金額 = (需求量 - 上一個級距的數量) * 級距單價
-                origin_pay += (DEMAND - previous_interval_amount) * class_interval_price
-                done = True
 
-                if total_pay <= origin_pay:
-                    best_pay = total_pay
-                    best_amount = class_interval_amount
-                else:
-                    best_pay = origin_pay
-                    best_amount = DEMAND
+# 演算法 - 2
+def algorithm_two(items_weight, items_utility):
+    space = 0
+    utility = 0
+    answer_list = []
 
-            else:
-                if total_pay <= best_pay:
-                    best_pay = total_pay
-                    best_amount = class_interval_amount
-        else:
-            origin_pay += interval_amount
-        previous_interval_amount = class_interval_amount
-
-    return str(best_amount) + "," + str(best_pay)
+    # (編號, 重量, 效用)
+    temp_list = [
+        (index + 1, items_weight[index], items_utility[index])
+        for index in range(ITEM_NUM)
+    ]
+    # 效用較大 > 重量較輕 > 編號較小
+    sorted_list = sorted(temp_list, key=lambda tup: (-tup[2], tup[1], tup[0], tup[2]))
+    for each in sorted_list:
+        __index__ = each[0]
+        __weight__ = each[1]
+        __utility__ = each[2]
+        temp_space = space + __weight__
+        if temp_space <= BACKPACK_CAPABILITY:
+            space = temp_space
+            utility += __utility__
+            answer_list.append(__index__)
+    return utility, sorted(answer_list)
 
 
 if __name__ == "__main__":

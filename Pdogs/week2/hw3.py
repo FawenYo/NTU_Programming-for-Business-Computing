@@ -1,35 +1,31 @@
-# 全票數量
-full_ticket_quantity = int(input())
-# 全票價格
-full_ticket_price = int(input())
-# 學生票數量
-concession_ticket_quantity = int(input())
-# 學生票價格
-concession_ticket_price = int(input())
-# 總支付金額
-total_amount = int(input())
-# 購票上限
-ticket_limit = int(input())
+# Init variable
+previous_interval_amount = 0
+pay_amount = 0
+done = False
 
-# 尚可購買張數 = 購票上限 - 全票數量 - 學生票數量
-ticket_left = ticket_limit - full_ticket_quantity - concession_ticket_quantity
+# 級距個數
+interval_amount = int(input())
+# 最少需要購買的食材公斤數
+demand = int(input())
 
-# 全票金額 = 全價數量 * 全票價格
-full_ticket_amount = full_ticket_quantity * full_ticket_price
-# 學生票金額 = 學生價數量 * 學生票價格
-concession_ticket_amount = concession_ticket_quantity * concession_ticket_price
-# 找錢金額 = 總支付金額 - 全票金額 - 學生票金額
-return_amount = total_amount - full_ticket_amount - concession_ticket_amount
+for i in range(interval_amount):
+    # 級距數量
+    class_interval_amount = int(input())
+    # 級距單價
+    class_interval_price = int(input())
 
-# "找錢金額" < 0 則不顯示
-if return_amount >= 0:
-    output_return_amount = "$" + str(return_amount)
-else:
-    output_return_amount = ""
+    # 達到目標級距
+    if demand < class_interval_amount:
+        # 尚未完成購買
+        if not done:
+            # 該級距應付金額 = (需求量 - 上一個級距的數量) * 級距單價
+            pay_amount += (demand - previous_interval_amount) * class_interval_price
+            done = True
+    else:
+        # 該級距應付金額 = (級距數量 - 上一個級距的數量) * 級距單價
+        pay_amount += (
+            class_interval_amount - previous_interval_amount
+        ) * class_interval_price
+        previous_interval_amount = class_interval_amount
 
-# "尚可購買張數" < 0 則不顯示
-if ticket_left >= 0:
-    output_ticket_left = str(ticket_left)
-    print(output_ticket_left, output_return_amount, sep=",")
-else:
-    print(output_return_amount)
+print(pay_amount)

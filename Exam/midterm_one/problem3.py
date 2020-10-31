@@ -24,5 +24,5 @@ def solution():
     return len([x for x in boxes if x != BOX_CAPABILITY])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

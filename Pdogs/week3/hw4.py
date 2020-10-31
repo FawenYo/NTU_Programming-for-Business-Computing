@@ -1,65 +1,56 @@
-import math
+""" 無條件捨去方法 """
+# 1. math.floor => 這題不能用math QQ
+# 2. int(n) => Python 預設直接砍掉浮點數部份
+# 3. int(str(n).split('.')[0]) => 醜到不知道怎麼說ㄉ爛code :)
 
+# 商品的種類數
+PRODUCT_CATEGORY_AMOUNT = int(input())
+# 組成套組的商品編號
+PACK_PRODUCT_INDEX = []
+for i in input().split(","):
+    PACK_PRODUCT_INDEX.append(int(i))
 # 商品價格
-LEMON_PRICE = 7
-ALMOND_OIL_PRICE = 0.6
-HONEY_PRICE = 1.2
-EGG_PRICE = 25
+PRODUCT_PRICE_LIST = []
+for i in input().split(","):
+    PRODUCT_PRICE_LIST.append(int(i))
+# 商品數量
+PRODUCT_AMOUNT = []
+for i in input().split(","):
+    PRODUCT_AMOUNT.append(int(i))
 
+""" Calculate Pack Amount """
+arr = []
+for i in PACK_PRODUCT_INDEX:
+    arr.append(PRODUCT_AMOUNT[i - 1])
 
-def main():
-    # 睡眠時間天數
-    sleep_days = int(input())
+total_pack_amount = min(arr)
+sale_pack_amount = total_pack_amount // 5
+remain_pack_amount = total_pack_amount - sale_pack_amount * 5
 
-    sleep_times = []
-    # 睡眠時數
-    for i in range(sleep_days):
-        sleep_times.append(float(input()))
+""" Calculate Money """
+pay_amount_sale = pay_amount_raw = 0
+for index in range(PRODUCT_CATEGORY_AMOUNT):
+    """ 原始價格 """
+    pay_amount_raw += PRODUCT_AMOUNT[index] * PRODUCT_PRICE_LIST[index]
 
-    # math.floor => 無條件捨去
-    print(math.floor(calculate(sleep_times=sleep_times)))
+    """ 套組折扣 """
+    product_index = index + 1
+    if product_index in PACK_PRODUCT_INDEX:
+        remain_product_amount = PRODUCT_AMOUNT[index] - total_pack_amount
 
+        pay_amount_sale += (
+            sale_pack_amount * 5 * 0.8
+            + remain_pack_amount * 0.9
+            + remain_product_amount
+        ) * PRODUCT_PRICE_LIST[index]
+    else:
+        # 商品數量 * 商品價格
+        pay_amount_sale += PRODUCT_AMOUNT[index] * PRODUCT_PRICE_LIST[index]
 
-def calculate(sleep_times):
-    # full_sleep: 睡眠時數 > 7 的 list
-    full_sleep = list(value for value in sleep_times if value > 7)
-    # 平均每日睡眠時間 = 全部睡眠時間加總 / 睡眠時間天數
-    avg_sleep_time = sum(sleep_times) / len(sleep_times)
+# 招募新人數量
+recruitment = int((pay_amount_raw - pay_amount_sale) // 1000)
 
-    lemon_face_mask = len(full_sleep)
-    honey_face_mask = len(sleep_times) - lemon_face_mask if avg_sleep_time <= 6 else 0
-    protein_face_mask = len(sleep_times) - lemon_face_mask if avg_sleep_time > 6 else 0
-
-    return cost(
-        lemon_face_mask=lemon_face_mask,
-        honey_face_mask=honey_face_mask,
-        protein_face_mask=protein_face_mask,
-    )
-
-
-# 計算成本
-def cost(lemon_face_mask, honey_face_mask, protein_face_mask):
-    global LEMON_PRICE
-
-    # math.ceil => 無條件進位
-    lemon = math.ceil(lemon_face_mask * 1.5)
-    honey = math.ceil(honey_face_mask * 18 + protein_face_mask * 6)
-    egg = math.ceil(protein_face_mask * 2)
-    almond_oil = math.ceil(lemon_face_mask * 4 + honey_face_mask * 9)
-
-    # 檸檬5顆以上打9折
-    if lemon >= 5:
-        LEMON_PRICE *= 0.9
-
-    # 成本
-    pay_cost = (
-        lemon * LEMON_PRICE
-        + honey * HONEY_PRICE
-        + math.ceil(egg / 3) * EGG_PRICE
-        + almond_oil * ALMOND_OIL_PRICE
-    )
-    return pay_cost
-
-
-if __name__ == "__main__":
-    main()
+if recruitment > 0:
+    print(str(int(pay_amount_sale)) + "," + str(recruitment))
+else:
+    print("So sad. I messed up.")
