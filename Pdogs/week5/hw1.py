@@ -21,9 +21,12 @@ def plotshift(line_list, x_offset=0, y_offset=0):
                 line_value[index] = value + x_offset
             else:
                 line_value[index] = value + y_offset
-        result.append("Line%d: %0.3f %0.3f %0.3f %0.3f" % (line_index, line_value[0], line_value[1], line_value[2], line_value[3]))
+        result.append(
+            "Line%d: %0.3f %0.3f %0.3f %0.3f"
+            % (line_index, line_value[0], line_value[1], line_value[2], line_value[3])
+        )
     return "\n".join(str(i) for i in result)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

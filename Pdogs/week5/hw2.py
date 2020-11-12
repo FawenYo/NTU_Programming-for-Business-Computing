@@ -25,12 +25,19 @@ def rotate(line_list, degree=90):
             if index % 2 == 0:
                 # NOTE: list is mutable, so we choose temp variable to remember last value.
                 temp = line_value[index]
-                line_value[index] = line_value[index] * math.cos(degree) + line_value[index+1] * -math.sin(degree)
+                line_value[index] = line_value[index] * math.cos(degree) + line_value[
+                    index + 1
+                ] * -math.sin(degree)
             else:
-                line_value[index] = temp * math.sin(degree) + line_value[index] * math.cos(degree)
-        result.append("Line%d: %0.3f %0.3f %0.3f %0.3f" % (line_index, line_value[0], line_value[1], line_value[2], line_value[3]))
+                line_value[index] = temp * math.sin(degree) + line_value[
+                    index
+                ] * math.cos(degree)
+        result.append(
+            "Line%d: %0.3f %0.3f %0.3f %0.3f"
+            % (line_index, line_value[0], line_value[1], line_value[2], line_value[3])
+        )
     return "\n".join(str(i) for i in result)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

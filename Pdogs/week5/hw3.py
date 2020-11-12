@@ -117,7 +117,10 @@ def best_team(seasons, records):
         team_index = 0
         year_data = []
         # 篩選當季該隊伍資料, 並以隊伍名稱排序
-        sub_records = sorted(list(filter(lambda arr: arr[2] == season, records)), key=lambda element: ord(element[0]))
+        sub_records = sorted(
+            list(filter(lambda arr: arr[2] == season, records)),
+            key=lambda element: ord(element[0]),
+        )
         for each in sub_records:
             team = each[0]
             at_bats = each[3]
@@ -126,7 +129,9 @@ def best_team(seasons, records):
                 # 非第一筆資料
                 if year_data:
                     # 更新上一隊打擊率
-                    year_data[team_index].append(year_data[team_index][1] / year_data[team_index][2])
+                    year_data[team_index].append(
+                        year_data[team_index][1] / year_data[team_index][2]
+                    )
                     team_index += 1
                 previous_team = team
                 # 新隊伍 : [隊伍代號, 打擊率, 打數]
@@ -135,7 +140,9 @@ def best_team(seasons, records):
                 year_data[team_index][1] += hits
                 year_data[team_index][2] += at_bats
         # 更新最後一隊打擊率
-        year_data[team_index].append(year_data[team_index][1] / year_data[team_index][2])
+        year_data[team_index].append(
+            year_data[team_index][1] / year_data[team_index][2]
+        )
         # 排序: 較大打擊率 > 較小打數 > 較小隊伍代號
         year_data.sort(key=lambda element: (-element[3], element[2], ord(element[0])))
         result.append(year_data[0][0])
