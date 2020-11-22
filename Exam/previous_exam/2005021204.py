@@ -19,11 +19,37 @@ class Solution:
     def word_to_num(self, text, num=0):
         # init
         units = [
-            "zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
-            "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
-            "sixteen", "seventeen", "eighteen", "nineteen",
+            "zero",
+            "one",
+            "two",
+            "three",
+            "four",
+            "five",
+            "six",
+            "seven",
+            "eight",
+            "nine",
+            "ten",
+            "eleven",
+            "twelve",
+            "thirteen",
+            "fourteen",
+            "fifteen",
+            "sixteen",
+            "seventeen",
+            "eighteen",
+            "nineteen",
         ]
-        tens = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+        tens = [
+            "twenty",
+            "thirty",
+            "forty",
+            "fifty",
+            "sixty",
+            "seventy",
+            "eighty",
+            "ninety",
+        ]
 
         # calculate ten
         for index, value in enumerate(tens):
@@ -40,5 +66,5 @@ class Solution:
         return num
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     Solution().main()

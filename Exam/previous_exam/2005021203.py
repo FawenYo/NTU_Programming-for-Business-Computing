@@ -24,14 +24,14 @@ class Solution:
     def solution(self):
         for rounds in range(self.jobs):
             """ find min cost """
-            data = {
-                "min_cost": 999,
-                "i": 0,
-                "j": 0
-            }
+            data = {"min_cost": 999, "i": 0, "j": 0}
             for index_i, value_i in enumerate(self.data):
                 for index_j, value_j in enumerate(value_i):
-                    if index_i in self.remain_employee and index_j in self.remain_jobs and value_j < data["min_cost"]:
+                    if (
+                        index_i in self.remain_employee
+                        and index_j in self.remain_jobs
+                        and value_j < data["min_cost"]
+                    ):
                         data["min_cost"] = value_j
                         data["i"] = index_i
                         data["j"] = index_j
@@ -41,8 +41,10 @@ class Solution:
             self.result[data["i"]] = data["j"]
             self.total_cost += data["min_cost"]
 
-        print("{};{}".format(",".join(str(i + 1) for i in self.result), self.total_cost))
+        print(
+            "{};{}".format(",".join(str(i + 1) for i in self.result), self.total_cost)
+        )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     Solution().main()

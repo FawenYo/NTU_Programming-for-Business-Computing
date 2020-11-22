@@ -1,5 +1,6 @@
 import math
 
+
 class Solution:
     def __init__(self):
         self.vectors = []
@@ -14,7 +15,7 @@ class Solution:
     def solution(self):
         all_distance = []
         for index_i, value_i in enumerate(self.vectors):
-            for index_j, value_j in enumerate(self.vectors[index_i + 1:]):
+            for index_j, value_j in enumerate(self.vectors[index_i + 1 :]):
                 distance = self.calculate_distance(dim_1=value_i, dim_2=value_j)
                 all_distance.append(distance)
         print(min(all_distance))
@@ -27,5 +28,5 @@ class Solution:
         return int(distance)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     Solution().main()
