@@ -1,0 +1,4 @@
+/Users/fawenyo/Desktop/Projects/NTU_Programming-for-Business-Computing/Pdogs/week7/news_title.txt
+/Users/fawenyo/Desktop/Projects/NTU_Programming-for-Business-Computing/Pdogs/week7/news_dict.txt
+/Users/fawenyo/Desktop/Projects/NTU_Programming-for-Business-Computing/Pdogs/week7/company_category.txt
+半導體股,12,4:2:1

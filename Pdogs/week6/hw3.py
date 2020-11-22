@@ -69,17 +69,24 @@ class HW3:
             for chr_index in range(len(temp)):
                 # 關鍵字長度
                 keywords_length = len(keywords[0])
-                content = temp[chr_index + offset: chr_index + offset + keywords_length]
+                content = temp[
+                    chr_index + offset : chr_index + offset + keywords_length
+                ]
                 # 內容為關鍵字
                 if content in keywords:
                     # 將關機字轉成 "|" 保護住
-                    temp = temp[:chr_index + offset] + "/" + "|" * keywords_length + "/" + temp[chr_index + offset + keywords_length:]
+                    temp = (
+                        temp[: chr_index + offset]
+                        + "/"
+                        + "|" * keywords_length
+                        + "/"
+                        + temp[chr_index + offset + keywords_length :]
+                    )
                     offset += 2
         # 前後皆為關鍵字
         while "//" in temp:
             temp = temp.replace("//", "/")
         return self.revert_to_title(title=title, temp=temp)
-
 
     def revert_to_title(self, title, temp):
         i = 0
