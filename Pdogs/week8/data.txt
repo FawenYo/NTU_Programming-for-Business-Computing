@@ -1,0 +1,47 @@
+2020/10/25 
+TaskC 
+A | Lucky | 2 0 | 1 0 | 2 0 2 0 / 0 1 / 0 1 
+W | Lucky |2020/08/08 
+L | Lucky 
+A | Fatty | 3 5 | 1 5 | 2 0 2 0 / 1 0 / 1 0 
+W | Fatty |2020/10/15 
+A | Happy | 6 5 | 2 5 | 2 0 2 0 / 1 0 / 1 5 
+W | Fatty |2020/10/20 
+W | Happy |2020/10/20 
+B | Fatty 
+W | Fatty |2020/10/24 
+Done
+
+2020/10/25 
+TaskD 
+A | Fatty | 3 5 | 1 5 | 2 0 2 0 / 1 0 / 1 0 
+W | Fatty |2020/10/15 
+A | Happy | 6 5 | 2 5 | 2 0 2 0 / 1 0 / 1 5 
+W | Fatty |2020/10/20 
+W | Happy |2020/10/20 
+B | Fatty 
+W | Fatty |2020/10/24 
+Done
+
+
+2020/10/25 
+TaskA , Fatty
+A | Fatty | 3 5 | 1 5 | 2 0 2 0 / 1 0 / 1 0 
+W | Fatty |2020/10/15 
+A | Happy | 6 5 | 2 5 | 2 0 2 0 / 1 0 / 1 6
+W | Fatty |2020/10/20 
+W | Happy |2020/10/20 
+B | Fatty 
+W | Fatty |2020/10/24 
+Done
+
+2020/10/25 
+TaskB 
+A | Fatty | 3 5 | 1 5 | 2 0 2 0 / 1 0 / 1 0 
+W | Fatty |2020/10/15 
+A | Happy | 6 5 | 2 5 | 2 0 2 0 / 1 0 / 1 6 
+W | Fatty |2020/10/20 
+W | Happy |2020/10/20 
+B | Fatty 
+W | Fatty |2020/10/24 
+Done
